@@ -2,11 +2,11 @@
 echo "current repository latest version:\n"
 git ls-remote --tags https://github.com/tcp-x/cd-plug-util.git
 # set latest version
-Version="v0.0.6"
+Version="v0.0.7"
 
 # cd $projDir
 go mod tidy
-git add go.mod i-exec.go
+git add go.mod go.sum i-exec.go
 git commit -am "set version $Version"
 git tag $Version
 git push origin $Version
