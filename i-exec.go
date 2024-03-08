@@ -19,7 +19,7 @@ type CdExecutorRPCClient struct {
 	client *rpc.Client
 }
 
-func (g *CdExecutorRPCClient) CdExec() string {
+func (g *CdExecutorRPCClient) CdExec(req string) string {
 	var resp string
 	err := g.client.Call("Plugin.CdExec", new(interface{}), &resp)
 	if err != nil {

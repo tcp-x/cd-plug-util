@@ -2,7 +2,7 @@
 echo "current repository latest version:\n"
 git ls-remote --tags https://github.com/tcp-x/cd-plug-util.git
 # set latest version
-Version="v0.0.7"
+Version="v0.0.8"
 
 # cd $projDir
 go mod tidy
