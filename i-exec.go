@@ -19,7 +19,7 @@ type CdExecutorRPCClient struct {
 	client *rpc.Client
 }
 
-func (g *CdExecutorRPCClient) CdExec(req string) string {
+func (g *CdExecutorRPCClient) CdExec(req string) (string, error) {
 	var resp string
 	err := g.client.Call("Plugin.CdExec", new(interface{}), &resp)
 	if err != nil {
@@ -28,7 +28,7 @@ func (g *CdExecutorRPCClient) CdExec(req string) string {
 		panic(err)
 	}
 
-	return resp
+	return resp, err
 }
 
 // Here is the RPC server that CdExecutorRPC talks to, conforming to
