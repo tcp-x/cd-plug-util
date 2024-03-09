@@ -41,7 +41,7 @@ type CdExecutorRPCServer struct {
 func (s *CdExecutorRPCServer) CdExec(args interface{}, resp *string) (string, error) {
 	fmt.Println("CdExecutorRPCServer::args:", args)
 	// req := args.(string)
-	*resp, _ = s.Impl.CdExec("xxx")
+	*resp, _ = s.Impl.CdExec("xxxx")
 	return *resp, nil
 }
 
