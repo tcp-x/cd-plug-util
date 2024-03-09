@@ -38,11 +38,11 @@ type CdExecutorRPCServer struct {
 	Impl CdExecutor
 }
 
-func (s *CdExecutorRPCServer) CdExec(args interface{}, resp *string) error {
+func (s *CdExecutorRPCServer) CdExec(args interface{}, resp *string) (string, error) {
 	fmt.Println("CdExecutorRPCServer::args:", args)
 	// req := args.(string)
 	*resp, _ = s.Impl.CdExec("xxxx")
-	return nil
+	return *resp, nil
 }
 
 // This is the implementation of plugin.Plugin so we can serve/consume this
