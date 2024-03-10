@@ -5,8 +5,16 @@ import (
 	"fmt"
 	"net/rpc"
 
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
 )
+
+// // Create an hclog.Logger
+// logger := hclog.New(&hclog.LoggerOptions{
+// 	Name:   "plugin",
+// 	Output: os.Stdout,
+// 	Level:  hclog.Debug,
+// })
 
 // CdExecutor represents the interface for executing commands in a plugin.
 type CdExecutor interface {
@@ -16,10 +24,12 @@ type CdExecutor interface {
 
 // Here is an implementation that talks over RPC
 type CdExecutorRPCClient struct {
+	logger hclog.Logger
 	client *rpc.Client
 }
 
 func (g *CdExecutorRPCClient) CdExec(req string) (string, error) {
+	g.logger.Info("CdExecutorRPCClient::CdExec()", "req", req)
 	var resp string
 	err := g.client.Call("Plugin.CdExec", new(interface{}), &resp)
 	if err != nil {
@@ -34,13 +44,14 @@ func (g *CdExecutorRPCClient) CdExec(req string) (string, error) {
 // Here is the RPC server that CdExecutorRPC talks to, conforming to
 // the requirements of net/rpc
 type CdExecutorRPCServer struct {
+	logger hclog.Logger
 	// This is the real implementation
 	Impl CdExecutor
 }
 
 func (s *CdExecutorRPCServer) CdExec(args interface{}, resp *string) error {
-	fmt.Println("CdExecutorRPCServer::args:", args)
 	req := fmt.Sprintf("%v", args)
+	s.logger.Info("CdExecutorRPCServer::CdExec()", "req", req)
 	*resp, _ = s.Impl.CdExec(req)
 	return nil
 }

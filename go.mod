@@ -2,12 +2,14 @@ module github.com/tcp-x/cd-plug-util
 
 go 1.21.5
 
-require github.com/hashicorp/go-plugin v1.6.0
+require (
+	github.com/hashicorp/go-hclog v0.14.1
+	github.com/hashicorp/go-plugin v1.6.0
+)
 
 require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/golang/protobuf v1.5.0 // indirect
-	github.com/hashicorp/go-hclog v0.14.1 // indirect
 	github.com/hashicorp/yamux v0.1.1 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
