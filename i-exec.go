@@ -24,12 +24,13 @@ type CdExecutor interface {
 
 // Here is an implementation that talks over RPC
 type CdExecutorRPCClient struct {
-	logger hclog.Logger
+	// logger hclog.Logger
 	client *rpc.Client
 }
 
 func (g *CdExecutorRPCClient) CdExec(req string) (string, error) {
-	g.logger.Info("CdExecutorRPCClient::CdExec()", "req", req)
+	// g.logger.Info("CdExecutorRPCClient::CdExec()", "req", req)
+	fmt.Println("CdExecutorRPCClient::CdExec():req:", req)
 	var resp string
 	err := g.client.Call("Plugin.CdExec", new(interface{}), &resp)
 	if err != nil {
