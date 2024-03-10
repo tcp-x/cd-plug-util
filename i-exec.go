@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/rpc"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
 )
 
@@ -45,14 +44,15 @@ func (g *CdExecutorRPCClient) CdExec(req string) (string, error) {
 // Here is the RPC server that CdExecutorRPC talks to, conforming to
 // the requirements of net/rpc
 type CdExecutorRPCServer struct {
-	logger hclog.Logger
+	// logger hclog.Logger
 	// This is the real implementation
 	Impl CdExecutor
 }
 
 func (s *CdExecutorRPCServer) CdExec(args interface{}, resp *string) error {
 	req := fmt.Sprintf("%v", args)
-	s.logger.Info("CdExecutorRPCServer::CdExec()", "req", req)
+	// s.logger.Info("CdExecutorRPCServer::CdExec()", "req", req)
+	fmt.Println("CdExecutorRPCServer::CdExec():req:", req)
 	*resp, _ = s.Impl.CdExec(req)
 	return nil
 }
